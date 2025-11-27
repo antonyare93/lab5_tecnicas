@@ -1,0 +1,51 @@
+<html ng-app="JuegoRuedaSuerte">
+
+<head>
+    <title>Rueda de suerte</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="js/juego.js"></script>
+    <script src="js/figura.js"></script>
+    <link href="estilos/styles.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body ng-controller="ControladorJuegoRuedaSuerte">
+    <div id="titulo">Rueda de suerte</div>
+    <div class="botones">
+        <a id="btnJugar" href="#" ng-click="jugar()" class="boton" ng-class="{'boton-deshabilitado': haGanado}" ng-disabled="haGanado">Jugar</a>
+    </div>
+
+    <div id="mesa">
+        <div ng-if="mensaje" class="mensaje" ng-class="{
+            'mensaje-victoria': haGanado,
+            'mensaje-par': mensaje.includes('par'),
+            'mensaje-sin-coincidencia': mensaje.includes('Sin coincidencias')
+        }">
+            {{ mensaje }}
+        </div>
+
+        <ul>
+            <li ng-repeat="figura in figuras" class="figura">
+                <img src="{{figura.getImagen()}}" title="{{figura.getNombre()}}" />
+            </li>
+        </ul>
+    </div>
+
+    <div id="estadisticas">
+        <h3>Estadísticas</h3>
+        <div class="estadistica-item">
+            <span class="estadistica-label">Victorias:</span>
+            <span class="estadistica-valor">{{ estadisticas.victorias }}</span>
+        </div>
+        <div class="estadistica-item">
+            <span class="estadistica-label">Pares:</span>
+            <span class="estadistica-valor">{{ estadisticas.pares }}</span>
+        </div>
+        <div class="estadistica-item">
+            <span class="estadistica-label">Sin coincidencias:</span>
+            <span class="estadistica-valor">{{ estadisticas.sinCoincidencias }}</span>
+        </div>
+    </div>
+
+</body>
+
+</html>
